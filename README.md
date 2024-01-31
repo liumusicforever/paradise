@@ -30,3 +30,23 @@ A configurable logger for logging across different modules.
 
 2. `paradise.common.downloader`
 Function to download MP3 files from URLs and save them locally.
+
+## Scripts Introduction
+
+### Environment Setup
+
+Make sure your development environment has the following packages installed:
+
+```bash
+pip install selenium 
+pip install requests
+```
+
+### How To Use
+```
+cd paradise/scripts
+```
+### Run your script.py
+```
+python your_script.py
+```
