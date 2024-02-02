@@ -1,5 +1,7 @@
 import requests
 import xml.etree.ElementTree as ET
+from paradise.common.mp3_downloader import download_mp3
+
 
 class PodcastFeed:
     def __init__(self, term):
@@ -36,7 +38,7 @@ class PodcastFeed:
                 for enclosure in enclosures:
                     url_attribute = enclosure.attrib.get('url')
                     self.audio_list.append(url_attribute)
-
+                
                 return self.audio_list
             else:
                 print(f"Failed to retrieve XML file. Status code: {response.status_code}")
@@ -44,10 +46,18 @@ class PodcastFeed:
             print("Feed URL is not available.")
 
         return []  # if feed_url is None，return empty list
+    
+    def download(self):
+
+        for i in range(0, len(audio_list)):
+            
+            download_mp3(self.audio_list[i],f'mp3/{len(audio_list)-i}.mp3')
 
 
 term_to_search = 'gooaye-%E8%82%A1%E7%99%8C'
 podcast_feed = PodcastFeed(term_to_search)
 audio_list = podcast_feed.get_audio_list()
 
-print('Audio List:',(audio_list))
+print('Audio List:',len(audio_list))
+
+download = podcast_feed.download()
